@@ -7,7 +7,7 @@ class Wxrd {
 	}
 
 	getUuid(){
-		return "";
+		return uuidv4();
 	}
 }
 
