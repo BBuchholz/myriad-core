@@ -30,3 +30,15 @@ test('should have a uuid', () => {
     
     expect(secondRegexForV4UuidString.test(uuidToTest)).toBe(true);
 });
+
+test('should have a createdAt timestamp', () => {
+
+	let newWxrd = new Wxrd();
+	expect(newWxrd.getCreatedAt()).toBeDefined();
+
+	const regexForUTCTimeStamp = /\bREGEX GOES HERE/;
+	const timestampToTest = newWxrd.getCreatedAt();
+
+	console.log("timestamp to test: " + timestampToTest);
+	expect(regexForUTCTimeStamp.test(timestampToTest)).toBe(true);
+});
