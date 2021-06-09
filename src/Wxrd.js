@@ -9,6 +9,18 @@ class Wxrd {
 	getUuid(){
 		return uuidv4();
 	}
+
+	getCreatedAt(){
+		return "";
+	}
+
+	getMetaDataByKey(keyToFind){
+		return "";
+	}
+
+	setMetaDataByKey(metaDataKey, metaDataValue){
+
+	}
 }
 
 module.exports = Wxrd;
