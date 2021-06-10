@@ -11,15 +11,16 @@ class Wxrd {
 	}
 
 	getCreatedAt(){
-		return "";
+		const currentTime = new Date();
+		return currentTime.toISOString();
 	}
 
 	getMetaDataByKey(keyToFind){
-		return "";
+		return this.metaData[keyToFind];
 	}
 
 	setMetaDataByKey(metaDataKey, metaDataValue){
-
+		this.metaData[metaDataKey] = metaDataValue;
 	}
 }
 

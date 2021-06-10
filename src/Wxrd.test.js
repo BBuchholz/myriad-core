@@ -1,9 +1,5 @@
 const Wxrd = require('./Wxrd');
 
-test('should have at least one test', () => {
-	expect(true).toBe(true);
-});
-
 test('should have a uuid', () => {
 	let newWxrd = new Wxrd();
 
@@ -22,13 +18,14 @@ test('should have a uuid', () => {
     const regexForV4UuidString = /\b[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/igm;
 
     console.log("uuid to test: " + uuidToTest);
-    expect(regexForV4UuidString.test(uuidToTest)).toBe(true);
+
+    expect(uuidToTest).toMatch(regexForV4UuidString);
 
     // ADAPTED FROM REGEX SOURCE AT: https://regexr.com/3an7c 
     const secondRegexForV4UuidString = /\b(uuid:){0,1}\s*([a-f0-9\\-]*){1}\s*/g;
 
     
-    expect(secondRegexForV4UuidString.test(uuidToTest)).toBe(true);
+    expect(uuidToTest).toMatch(secondRegexForV4UuidString);
 });
 
 test('should have a createdAt timestamp', () => {
@@ -36,11 +33,12 @@ test('should have a createdAt timestamp', () => {
 	let newWxrd = new Wxrd();
 	expect(newWxrd.getCreatedAt()).toBeDefined();
 
-	const regexForUTCTimeStamp = /\bREGEX GOES HERE/;
+    const regexForIso8601DateString = /^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$/;
+
 	const timestampToTest = newWxrd.getCreatedAt();
 
 	console.log("timestamp to test: " + timestampToTest);
-	expect(regexForUTCTimeStamp.test(timestampToTest)).toBe(true);
+	expect(timestampToTest).toMatch(regexForIso8601DateString);
 });
 
 test('should get and set metadata by key', () => {
