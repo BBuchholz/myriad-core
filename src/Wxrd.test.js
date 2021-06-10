@@ -28,6 +28,16 @@ test('should have a uuid', () => {
     expect(uuidToTest).toMatch(secondRegexForV4UuidString);
 });
 
+test('uuid should be stored as metadata', () => {
+
+	let newWxrd = new Wxrd();
+
+	const uuid = newWxrd.getUuid();
+
+	expect(newWxrd.getMetaDataByKey("uuid")).toBeDefined();
+	expect(newWxrd.getMetaDataByKey("uuid")).toMatch(uuid);
+})
+
 test('should have a createdAt timestamp', () => {
 
 	let newWxrd = new Wxrd();
@@ -40,6 +50,17 @@ test('should have a createdAt timestamp', () => {
 	console.log("timestamp to test: " + timestampToTest);
 	expect(timestampToTest).toMatch(regexForIso8601DateString);
 });
+
+
+test('createdAt should be stored as metadata', () => {
+
+	let newWxrd = new Wxrd();
+
+	const createdAt = newWxrd.getCreatedAt();
+
+	expect(newWxrd.getMetaDataByKey("createdAt")).toBeDefined();
+	expect(newWxrd.getMetaDataByKey("createdAt")).toMatch(createdAt);
+})
 
 test('should get and set metadata by key', () => {
 
