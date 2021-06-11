@@ -1,31 +1,25 @@
-const { v4: uuidv4 } = require('uuid');
-const UUID_KEY = "uuid";
-const CREATED_AT_KEY = "createdAt";
+const Wxrd = defaultAlias => {
 
-class Wxrd {
+	const self = {
+		metaData: new Map()
+	};
 
-	constructor(){
-		const currentTime = new Date();
-		this.metaData = new Map();
-		this.setMetaDataByKey(UUID_KEY, uuidv4());
-		this.setMetaDataByKey(CREATED_AT_KEY, currentTime.toISOString());
-	}
+	self.metaData["defaultAlias"] = defaultAlias;
 
-	getUuid(){
-		return this.getMetaDataByKey(UUID_KEY);
-	}
+	const wxrdCapabilities = self => ({
 
-	getCreatedAt(){
-		return this.getMetaDataByKey(CREATED_AT_KEY);
-	}
+		getMetaDataByKey: (keyToFind) => {
+			return self.metaData[keyToFind];
+		},
 
-	getMetaDataByKey(keyToFind){
-		return this.metaData[keyToFind];
-	}
+		setMetaDataByKey: (metaDataKey, metaDataValue) => {
+			self.metaData[metaDataKey] = metaDataValue;
+		},
 
-	setMetaDataByKey(metaDataKey, metaDataValue){
-		this.metaData[metaDataKey] = metaDataValue;
-	}
-}
+		
+	});
+
+	return Object.assign(self, wxrdCapabilities(self));
+};
 
 module.exports = Wxrd;
