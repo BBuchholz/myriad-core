@@ -1,25 +1,19 @@
+const withUniversalId = require('./withUniversalId');
+const canLog = require('./canLog');
+
 const Wxrd = defaultAlias => {
 
 	const self = {
 		metaData: new Map()
 	};
 
-	self.metaData["defaultAlias"] = defaultAlias;
+	self.metaData.set("defaultAlias", defaultAlias);
 
-	const wxrdCapabilities = self => ({
-
-		getMetaDataByKey: (keyToFind) => {
-			return self.metaData[keyToFind];
-		},
-
-		setMetaDataByKey: (metaDataKey, metaDataValue) => {
-			self.metaData[metaDataKey] = metaDataValue;
-		},
-
-		
-	});
-
-	return Object.assign(self, wxrdCapabilities(self));
+	return Object.assign(
+				self, 
+				withUniversalId(self),
+				canLog(self)
+			);
 };
 
 module.exports = Wxrd;
