@@ -100,3 +100,10 @@ test('createdAt should be stored as metadata', () => {
 	expect(newWxrd.metaData.get("createdAt")).toBeDefined();
 	expect(newWxrd.metaData.get("createdAt")).toMatch(createdAt);
 })
+
+test('should have a key for wxrdType that defaults to Wxrd', () => {
+
+	const newWxrd = Wxrd("test");
+	expect(newWxrd.metaData.get("wxrdType")).toBeDefined();
+	expect(newWxrd.metaData.get("wxrdType")).toMatch("Wxrd");
+});
