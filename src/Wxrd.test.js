@@ -3,8 +3,11 @@ const Wxrd = require('./Wxrd');
 test('should have a map called metaData with defaultAlias set', () => {
 
 	const newWxrd = Wxrd("test");
+	
 
-	expect(newWxrd.metaData.get("defaultAlias")).toMatch("test");
+	//console.log(newWxrd);
+
+	expect(newWxrd.getAlias(newWxrd.getUuid())).toMatch("test");
 });
 
 
@@ -30,7 +33,7 @@ test('should have a uuid', () => {
 	// console.log("before init : ");
 	// console.log(newWxrd);
 
-	newWxrd.initializeUuid();
+	
 
 	// console.log("after init : ");
 	// console.log(newWxrd);
@@ -63,7 +66,7 @@ test('should have a uuid', () => {
 test('uuid should be stored as metadata', () => {
 
 	const newWxrd = Wxrd("test");
-	newWxrd.initializeUuid();
+	
 
 	const uuid = newWxrd.getUuid();
 
@@ -74,8 +77,6 @@ test('uuid should be stored as metadata', () => {
 test('should have a createdAt timestamp', () => {
 
 	const newWxrd = Wxrd("test");
-	newWxrd.initializeUuid();
-	newWxrd.initializeCreatedAt();
 
 	expect(newWxrd.getCreatedAt()).toBeDefined();
 
@@ -92,8 +93,6 @@ test('should have a createdAt timestamp', () => {
 test('createdAt should be stored as metadata', () => {
 
 	const newWxrd = Wxrd("test");
-	newWxrd.initializeUuid();
-	newWxrd.initializeCreatedAt();
 
 	const createdAt = newWxrd.getCreatedAt();
 
