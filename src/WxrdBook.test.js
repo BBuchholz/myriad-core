@@ -30,15 +30,15 @@ test('should test for inclusion of a member with hasMember(uuid)', () => {
 	const newWxrdBook = WxrdBook("testBook");
 	const newWxrd = Wxrd("test");
 
-	console.log(newWxrd);
-	console.log(newWxrdBook);
+	// console.log(newWxrd);
+	// console.log(newWxrdBook);
 
 	expect(newWxrdBook.hasMember(newWxrd)).toBe(false);
 
 	newWxrdBook.addMember(newWxrd);
 
-	console.log(newWxrd);
-	console.log(newWxrdBook);
+	// console.log(newWxrd);
+	// console.log(newWxrdBook);
 
 	expect(newWxrdBook.hasMember(newWxrd)).toBe(true);
 

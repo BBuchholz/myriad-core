@@ -17,6 +17,11 @@ const withMembers = self => ({
 	addMember: (member) => {
 
 		self.metaData.get(MEMBERS_KEY).set(member.getUuid(), member);
+	},
+
+	hasMember: (member) => {
+
+		return self.metaData.get(MEMBERS_KEY).has(member.getUuid());
 	}
 
 
