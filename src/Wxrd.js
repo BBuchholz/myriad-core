@@ -9,9 +9,6 @@ const Wxrd = defaultAlias => {
 		metaData: new Map()
 	};
 
-	//self.metaData.set("defaultAlias", defaultAlias);
-	//self.metaData.set("wxrdType", "Wxrd");
-
 	const newSelf = Object.assign(
 						self, 
 						withUniversalId(self),
