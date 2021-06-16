@@ -14,15 +14,25 @@ test('should have a members metadata entry', () => {
 	expect(newWxrdBook.metaData.get("members")).toBeDefined();
 });
 
+test('should have getAllMembers() returning all members', () => {
 
-////////////////////////////////////////////////////////////////
-// THESE ARE FROM THE PLANNING DOC, UNCOMMENT AS WE IMPLEMENT //
-////////////////////////////////////////////////////////////////
+	const newWxrdBook = WxrdBook("testBook");
 
-// test('should have getAllMembers() returning all members', () => {
+	expect(newWxrdBook.getAllMembers()).toBeDefined();
 
-// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
-// });
+	console.log(newWxrdBook);
+
+	expect(newWxrdBook.getAllMembers().size).toBe(0);
+
+	const newWxrd = Wxrd("test");
+
+	newWxrdBook.addMember(newWxrd);
+
+	console.log(newWxrdBook);
+
+	expect(newWxrdBook.getAllMembers().size).toBe(1);
+
+});
 
 
 test('should test for inclusion of a member with hasMember(uuid)', () => {
