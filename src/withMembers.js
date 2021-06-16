@@ -16,6 +16,10 @@ const withMembers = self => ({
 
 	addMember: (member) => {
 
+		if(!member.getUuid()){
+			throw("function getUuid() not defined for member");
+		}
+
 		self.metaData.get(MEMBERS_KEY).set(member.getUuid(), member);
 	},
 

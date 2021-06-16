@@ -45,7 +45,26 @@ test('should test for inclusion of a member with hasMember(uuid)', () => {
 });
 
 
-// test('should throw error if addMember(member) is called on an object without a uuid', () => {
+test('should throw error if addMember(member) is called on an object without a uuid', () => {
 
-// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
-// });
+	function addEmptyUuid(){
+		const newWxrdBook = WxrdBook("testBook");
+		const newWxrd = Wxrd("test");
+
+		newWxrd.metaData.set("uuid", "");
+
+		newWxrdBook.addMember(newWxrd);
+	}
+
+	expect(addEmptyUuid).toThrowError('function getUuid() not defined for member');
+
+
+	function addEmptyObject(){
+		const newWxrdBook = WxrdBook("testBook");
+		const newWxrd = {};
+
+		newWxrdBook.addMember(newWxrd);
+	}
+
+	expect(addEmptyUuid).toThrowError('function getUuid() not defined for member');
+});
