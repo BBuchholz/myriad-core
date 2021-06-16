@@ -20,7 +20,7 @@ test('should have getAllMembers() returning all members', () => {
 
 	expect(newWxrdBook.getAllMembers()).toBeDefined();
 
-	console.log(newWxrdBook);
+	//console.log(newWxrdBook);
 
 	expect(newWxrdBook.getAllMembers().size).toBe(0);
 
@@ -28,7 +28,7 @@ test('should have getAllMembers() returning all members', () => {
 
 	newWxrdBook.addMember(newWxrd);
 
-	console.log(newWxrdBook);
+	//console.log(newWxrdBook);
 
 	expect(newWxrdBook.getAllMembers().size).toBe(1);
 

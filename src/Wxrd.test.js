@@ -106,3 +106,36 @@ test('should have a key for wxrdType that defaults to Wxrd', () => {
 	expect(newWxrd.metaData.get("wxrdType")).toBeDefined();
 	expect(newWxrd.metaData.get("wxrdType")).toMatch("Wxrd");
 });
+
+
+
+////////////////////////////////////////////////////////////////
+// THESE ARE FROM THE PLANNING DOC, UNCOMMENT AS WE IMPLEMENT //
+////////////////////////////////////////////////////////////////
+
+test('should test equality using metadata only', () => {
+	// (ie. shouldn't matter if object assign has different 
+	// values for methods and such, only check metadata fields
+	// for equality comparison)
+
+	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
+});
+
+// test('should accept JSON object as single parameter', () => {
+// 	// ie. should modify current defaultAlias implementation
+// 	// everywhere it exists)
+
+// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
+// });
+
+// test('should assume a single string as creation parameter to be the defaultAlias as is handled now', () => {
+// 	// ie. should wrap that string in a JSON object and load normally
+
+// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
+// });
+
+// test('should export JSON object containing only metadata values with an export function', () => {
+// 	// ie. don't attempt to serialize function maps from object.assign
+
+// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
+// });
