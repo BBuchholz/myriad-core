@@ -107,35 +107,65 @@ test('should have a key for wxrdType that defaults to Wxrd', () => {
 	expect(newWxrd.metaData.get("wxrdType")).toMatch("Wxrd");
 });
 
-
-
-////////////////////////////////////////////////////////////////
-// THESE ARE FROM THE PLANNING DOC, UNCOMMENT AS WE IMPLEMENT //
-////////////////////////////////////////////////////////////////
-
-test('should test equality using metadata only', () => {
+test('should have equal metadata for repeated map initialization data', () => {
 	// (ie. shouldn't matter if object assign has different 
 	// values for methods and such, only check metadata fields
-	// for equality comparison)
+	// for equality comparison --
+	// -- we want to load from and store to strings/text...)
 
-	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
+	const mapOne = new Map();
+	const mapTwo = new Map();
+	mapOne.set("defaultAlias", "first");
+	mapTwo.set("defaultAlias", "first");
+	const firstWxrd = Wxrd(mapOne);
+	const secondWxrdlookingForMatch = Wxrd(mapTwo);
+
+	expect(firstWxrd.metaData).toEqual(secondWxrdlookingForMatch.metaData);
 });
 
-// test('should accept JSON object as single parameter', () => {
-// 	// ie. should modify current defaultAlias implementation
-// 	// everywhere it exists)
+test('should accept a map as a single parameter', () => {
+	// ie. should modify current defaultAlias implementation
+	// everywhere it exists)
 
-// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
-// });
+	const mapOne = new Map();
+	mapOne.set("defaultAlias", "first");
 
-// test('should assume a single string as creation parameter to be the defaultAlias as is handled now', () => {
-// 	// ie. should wrap that string in a JSON object and load normally
+	const mapTwo = new Map(JSON.parse('[["defaultAlias","first"]]'));
+	
+	const firstWxrd = Wxrd(mapOne);
+	const secondWxrdlookingForMatch = Wxrd(mapTwo);
 
-// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
-// });
+	expect(firstWxrd.metaData).toEqual(secondWxrdlookingForMatch.metaData);
 
-// test('should export JSON object containing only metadata values with an export function', () => {
-// 	// ie. don't attempt to serialize function maps from object.assign
+});
 
-// 	expect("WRITE THE TEST").toMatch("TEST HAS BEEN WRITTEN");
-// });
+test('should assume a single string as creation parameter to be the defaultAlias as is handled now', () => {
+	// ie. should load normally
+
+	const newWxrd = Wxrd("test");
+	expect(newWxrd.getAlias()).toMatch("test");
+});
+
+test('should export wxrdString containing only metadata values in a parseable format', () => {
+	// ie. don't attempt to serialize function maps from object.assign
+
+	const mapOne = new Map();
+	mapOne.set("defaultAlias", "first");
+	const firstWxrd = Wxrd(mapOne);
+	const wxrdString = firstWxrd.export();
+
+	expect(wxrdString).toEqual('[["defaultAlias","first"]]');
+});
+
+test('should detect and parse wxrdStrings as initialization data', () => {
+
+	const wxrdString = '[["defaultAlias","first"]]';
+
+	const mapOne = new Map();
+	mapOne.set("defaultAlias", "first");
+	const firstWxrd = Wxrd(mapOne);
+
+	const secondWxrdlookingForMatch = Wxrd(wxrdString);
+
+	expect(firstWxrd.metaData).toEqual(secondWxrdlookingForMatch.metaData);
+});

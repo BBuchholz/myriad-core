@@ -1,12 +1,12 @@
 const withTransport = self => ({
 
-	importMetaData: (metaData) => {
+	import: (metaData) => {
 		
 	},
 
-	exportMetaData: () => {
-
-		return self.metaData;
+	export: () => {
+		
+		return JSON.stringify(Array.from(self.metaData.entries()));
 	}
 
 });

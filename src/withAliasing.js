@@ -8,6 +8,11 @@ const ALIASES_KEY = "aliases";
 const withAliasing = self => ({
 
 	getAlias: (uuidToGet) => {
+
+		if(!uuidToGet){
+			uuidToGet = self.getUuid();
+		}
+		
 		return self.metaData.get(ALIASES_KEY).get(uuidToGet);
 	},
 

@@ -78,3 +78,4 @@ test('should throw error if addMember(member) is called on an object without a u
 
 	expect(addEmptyUuid).toThrowError('function getUuid() not defined for member');
 });
+
