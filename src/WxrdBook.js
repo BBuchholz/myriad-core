@@ -11,6 +11,7 @@ const WxrdBook = defaultAlias => {
 					);
 
 	newSelf.initializeMembers();
+	newSelf.metaData.set("wxrdType", "WxrdBook");
 
 	return newSelf;
 };

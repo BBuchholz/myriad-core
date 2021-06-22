@@ -1,6 +1,6 @@
 {
 	"name": "@entomdt/myriad-core",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"license": "MIT",
 	"devDependencies": {
 		"jest": "^27.0.4"
