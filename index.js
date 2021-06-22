@@ -1,5 +1,5 @@
-import { default as Wxrd } from './src/Wxrd';
-import { default as WxrdBook } from './src/WxrdBook';
+const Wxrd = require('./src/Wxrd');
+const WxrdBook = require('./src/WxrdBook');
 
 export { 
 	Wxrd,
