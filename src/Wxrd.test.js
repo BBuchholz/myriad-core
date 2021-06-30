@@ -169,3 +169,25 @@ test('should detect and parse wxrdStrings as initialization data', () => {
 
 	expect(firstWxrd.metaData).toEqual(secondWxrdlookingForMatch.metaData);
 });
+
+
+test('should export as xml', () => {
+	
+	const mapOne = new Map();
+	mapOne.set("defaultAlias", "first");
+	const firstWxrd = Wxrd(mapOne);
+	const wxrdString = firstWxrd.exportXml();
+
+	expect(wxrdString).toEqual('<wxrd><metaData key="defaultAlias">first</metadata></wxrd>');
+});
+
+test('should import from xml', () => {
+	
+	expect("WRITE THE TEST").toEqual("NOT WRITTEN");
+	// const mapOne = new Map();
+	// mapOne.set("defaultAlias", "first");
+	// const firstWxrd = Wxrd(mapOne);
+	// const wxrdString = firstWxrd.exportXml();
+
+	// expect(wxrdString).toEqual('[["defaultAlias","first"]]');
+});
