@@ -1,4 +1,5 @@
 const XmlTransport = require('./XmlTransport');
+const Wxrd = require('./Wxrd');
 
 test('should export a Wxrd as xml', () => {
 	
@@ -8,7 +9,7 @@ test('should export a Wxrd as xml', () => {
 	// functionality going with something familiar
 
 	const mapOne = new Map();
-	const xmlTransporter = new XmlTransport();
+	const xmlTransporter = XmlTransport();
 	mapOne.set("defaultAlias", "first");
 	const firstWxrd = Wxrd(mapOne);
 	const xmlString = xmlTransporter.exportWxrd(firstWxrd);
@@ -16,16 +17,16 @@ test('should export a Wxrd as xml', () => {
 	expect(xmlString).toEqual('<wxrd><metaData key="defaultAlias">first</metadata></wxrd>');
 });
 
-test('should import from xml', () => {
+// test('should import from xml', () => {
 	
-	expect("FINISH THE EXPORT TEST FIRST").toEqual("NOW WRITE THIS ONE");
-	// const mapOne = new Map();
-	// mapOne.set("defaultAlias", "first");
-	// const firstWxrd = Wxrd(mapOne);
-	// const wxrdString = firstWxrd.exportXml();
+// 	expect("FINISH THE EXPORT TEST FIRST").toEqual("NOW WRITE THIS ONE");
+// 	// const mapOne = new Map();
+// 	// mapOne.set("defaultAlias", "first");
+// 	// const firstWxrd = Wxrd(mapOne);
+// 	// const wxrdString = firstWxrd.exportXml();
 
-	// expect(wxrdString).toEqual('[["defaultAlias","first"]]');
-});
+// 	// expect(wxrdString).toEqual('[["defaultAlias","first"]]');
+// });
 
 //TODO: add tests for different types (eg. WxrdBook, AliasLists) cuz each will have special cases (like looking for nested members and aliases)
 
