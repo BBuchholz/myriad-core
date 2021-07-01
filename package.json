@@ -6,7 +6,7 @@
 		"jest": "^27.0.4"
 	},
 	"scripts": {
-		"test": "jest"
+		"test": "jest --watch"
 	},
 	"dependencies": {
 		"elementtree": "^0.1.7",
