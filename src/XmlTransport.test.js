@@ -8,13 +8,12 @@ test('should export a Wxrd as xml', () => {
 	// something else in the future if need be, and get the basic
 	// functionality going with something familiar
 
-	const mapOne = new Map();
 	const xmlTransporter = XmlTransport();
-	mapOne.set("defaultAlias", "first");
-	const firstWxrd = Wxrd(mapOne);
-	const xmlString = xmlTransporter.exportWxrd(firstWxrd);
+	const testWxrd = Wxrd("test");
+	//console.log(testWxrd);
+	const xmlString = xmlTransporter.exportWxrd(testWxrd);
 
-	expect(xmlString).toEqual('<wxrd xmlns="http://www.w3.org/2005/Atom"><metaData key="defaultAlias">first</metadata></wxrd>');
+	expect(xmlString).toEqual('<wxrd xmlns="http://www.w3.org/2005/Atom"><metaData key="defaultAlias">test</metaData></wxrd>');
 });
 
 // test('should import from xml', () => {

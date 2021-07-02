@@ -15,7 +15,8 @@ const XmlTransport = () => {
 			root.set('xmlns', 'http://www.w3.org/2005/Atom');
 
 			var defaultAliasEl = SubElement(root, 'metaData');
-			defaultAliasEl.text = wxrdToExport.getDefaultAlias();
+			defaultAliasEl.set('key', 'defaultAlias');
+			defaultAliasEl.text = wxrdToExport.getAlias();
 
 			var etree = new ElementTree(root);
 			var xml = etree.write({'xml_declaration': false});
