@@ -12,20 +12,25 @@ test('should export a Wxrd as xml', () => {
 	const testWxrd = Wxrd("test");
 	//console.log(testWxrd);
 	const xmlString = xmlTransporter.exportWxrd(testWxrd);
+	const expectedString = '<wxrd xmlns="http://www.w3.org/2005/Atom"><metaData key="defaultAlias">test</metaData></wxrd>';
 
-	expect(xmlString).toEqual('<wxrd xmlns="http://www.w3.org/2005/Atom"><metaData key="defaultAlias">test</metaData></wxrd>');
+	expect(xmlString).toEqual(expectedString);
 });
 
-// test('should import from xml', () => {
+test('should import from xml', () => {
 	
-// 	expect("FINISH THE EXPORT TEST FIRST").toEqual("NOW WRITE THIS ONE");
-// 	// const mapOne = new Map();
-// 	// mapOne.set("defaultAlias", "first");
-// 	// const firstWxrd = Wxrd(mapOne);
-// 	// const wxrdString = firstWxrd.exportXml();
+	const importString = '<wxrd xmlns="http://www.w3.org/2005/Atom"><metaData key="defaultAlias">test</metaData></wxrd>';
 
-// 	// expect(wxrdString).toEqual('[["defaultAlias","first"]]');
-// });
+	const mapOne = new Map();
+	mapOne.set("defaultAlias", "test");
+	const firstWxrd = Wxrd(mapOne);
+
+	const xmlTransporter = XmlTransport();
+
+	const secondWxrdlookingForMatch = xmlTransporter.importWxrd(importString);
+
+	expect(firstWxrd.metaData).toEqual(secondWxrdlookingForMatch.metaData);
+});
 
 //TODO: add tests for different types (eg. WxrdBook, AliasLists) cuz each will have special cases (like looking for nested members and aliases)
 

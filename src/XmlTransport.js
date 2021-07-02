@@ -3,6 +3,7 @@ const XML = et.XML;
 const ElementTree = et.ElementTree;
 const Element = et.Element;
 const SubElement = et.SubElement;
+const Wxrd = require('./Wxrd');
 
 const XmlTransport = () => {
 
@@ -21,6 +22,25 @@ const XmlTransport = () => {
 			var etree = new ElementTree(root);
 			var xml = etree.write({'xml_declaration': false});
 			return xml;
+		},
+
+		importWxrd: (wxrdAsXmlString) => {
+
+			const etree = et.parse(wxrdAsXmlString);
+			
+			const metaDataEls = etree.findall('./metaData');
+			const metaDataMap = new Map();
+
+			for(var i = 0; i < metaDataEls.length; i++){
+
+				var metaDataEl = metaDataEls[i];
+
+				const thisKey = metaDataEl.get('key');
+				const thisValue = metaDataEl.text;
+				metaDataMap.set(thisKey, thisValue);
+			}
+
+			return Wxrd(metaDataMap);
 		}
 	};
 	
