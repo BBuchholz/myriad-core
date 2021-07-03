@@ -1,7 +1,4 @@
-// const myriadCore  = require('./index');
-// const Wxrd = myriadCore.Wxrd;
-
-const { Wxrd, WxrdBook } = require('./index');
+const { Wxrd, WxrdBook, XmlTransport } = require('./index');
 
 test('should have Wxrd defined in index', () => {
 
@@ -22,4 +19,14 @@ test('should have WxrdBook defined in index', () => {
 	//console.log(newWxrdBook);
 
 	expect(newWxrdBook.getAlias(newWxrdBook.getUuid())).toMatch("test");
+});
+
+
+test('should have XmlTransport defined in index', () => {
+
+	const newWxrd = Wxrd("test");
+	const xmlTransporter = XmlTransport();
+	const xmlString = xmlTransporter.exportWxrd(newWxrd);
+
+	expect(xmlString).toMatch('test');
 });
