@@ -8,9 +8,9 @@ const withMembers = self => ({
 
 	initializeMembers: () => {
 
-		if(!self.metaData.has(MEMBERS_KEY)){
+		if(!self.members){
 
-			self.metaData.set(MEMBERS_KEY, new Map());
+			self.members = new Map();
 		}
 	},
 
@@ -20,17 +20,17 @@ const withMembers = self => ({
 			throw("function getUuid() not defined for member");
 		}
 
-		self.metaData.get(MEMBERS_KEY).set(member.getUuid(), member);
+		self.members.set(member.getUuid(), member);
 	},
 
 	hasMember: (member) => {
 
-		return self.metaData.get(MEMBERS_KEY).has(member.getUuid());
+		return self.members.has(member.getUuid());
 	},
 
 	getAllMembers: () => {
 
-		return self.metaData.get(MEMBERS_KEY);
+		return self.members;
 	}
 
 

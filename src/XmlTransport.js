@@ -15,9 +15,17 @@ const XmlTransport = () => {
 			var root = Element('wxrd');
 			root.set('xmlns', 'http://www.w3.org/2005/Atom');
 
-			var defaultAliasEl = SubElement(root, 'metaData');
-			defaultAliasEl.set('key', 'defaultAlias');
-			defaultAliasEl.text = wxrdToExport.getAlias();
+			wxrdToExport.metaData.forEach((value, key) => {
+				var metaDataEl = SubElement(root, 'metaData');
+				metaDataEl.set('key', key);
+				metaDataEl.text = value;
+			});
+
+			wxrdToExport.aliases.forEach((value, key) => {
+				var aliasEl = SubElement(root, 'alias');
+				aliasEl.set('key', key);
+				aliasEl.text = value;
+			});
 
 			var etree = new ElementTree(root);
 			var xml = etree.write({'xml_declaration': false});
@@ -40,7 +48,19 @@ const XmlTransport = () => {
 				metaDataMap.set(thisKey, thisValue);
 			}
 
-			return Wxrd(metaDataMap);
+			const importedWxrd = Wxrd(metaDataMap);
+
+			const aliasEls = etree.findall('./alias');
+			//console.log(aliasEls);
+			for(var i = 0; i < aliasEls.length; i++){
+
+				var aliasEl = aliasEls[i];
+				const thisKey = aliasEl.get('key');
+				const thisValue = aliasEl.text;
+				importedWxrd.setAlias(thisKey, thisValue);
+			}
+
+			return importedWxrd;
 		}
 	};
 	

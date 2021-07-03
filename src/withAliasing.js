@@ -13,20 +13,20 @@ const withAliasing = self => ({
 			uuidToGet = self.getUuid();
 		}
 		
-		return self.metaData.get(ALIASES_KEY).get(uuidToGet);
+		return self.aliases.get(uuidToGet);
 	},
 
 	initializeAliases: () => {
 
-		if(!self.metaData.has(ALIASES_KEY)){
+		if(!self.aliases){
 
-			self.metaData.set(ALIASES_KEY, new Map());
+			self.aliases = new Map();
 		}
 	},
 
 	setAlias: (uuidKey, aliasValue) => {
 
-		self.metaData.get(ALIASES_KEY).set(uuidKey, aliasValue);
+		self.aliases.set(uuidKey, aliasValue);
 	}
 
 

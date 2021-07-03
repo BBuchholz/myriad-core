@@ -5,13 +5,13 @@ test('should have at least one test', () => {
 	expect(true).toBe(true);
 });
 
-test('should have a members metadata entry', () => {
+test('should have a members map', () => {
 
 	const newWxrdBook = WxrdBook("test");
 
 	//console.log(newWxrdBook);
 
-	expect(newWxrdBook.metaData.get("members")).toBeDefined();
+	expect(newWxrdBook.members).toBeDefined();
 });
 
 test('should have getAllMembers() returning all members', () => {
