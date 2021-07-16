@@ -1,22 +1,23 @@
-const WXRD_TYPE_KEY = "wxrdType";
+/**
+ * @file encapsulates capabilities related to wxrd types
+ */
 
-const withTyping = self => ({
+const WXRD_TYPE_KEY = 'wxrdType';
 
-	getWxrdType: () => {
-		return self.metaData.get(WXRD_TYPE_KEY);
-	},
+const withTyping = (self) => ({
 
-	initializeWxrdType: (wxrdTypeValue) => {
+  getWxrdType: () => self.metaData.get(WXRD_TYPE_KEY),
 
-		if(!self.metaData.has(WXRD_TYPE_KEY)){
+  initializeWxrdType: (wxrdTypeValue) => {
 
-			self.metaData.set(WXRD_TYPE_KEY, wxrdTypeValue);
-		}
-	}
+    if (!self.metaData.has(WXRD_TYPE_KEY)) {
+
+      self.metaData.set(WXRD_TYPE_KEY, wxrdTypeValue);
+
+    }
+
+  },
 
 });
-
-
-
 
 module.exports = withTyping;
