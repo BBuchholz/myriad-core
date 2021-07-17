@@ -1,17 +1,11 @@
-const withTransport = self => ({
+const withTransport = (self) => ({
 
-	import: (metaData) => {
-		
-	},
+  import: (metaData) => {
 
-	export: () => {
-		
-		return JSON.stringify(Array.from(self.metaData.entries()));
-	}
+  },
+
+  export: () => JSON.stringify(Array.from(self.metaData.entries())),
 
 });
-
-
-
 
 module.exports = withTransport;

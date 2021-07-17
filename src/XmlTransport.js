@@ -1,71 +1,83 @@
+/**
+ * @file Handles all xml import and export functionality.
+ */
+
 const et = require('elementtree');
-const XML = et.XML;
-const ElementTree = et.ElementTree;
-const Element = et.Element;
-const SubElement = et.SubElement;
+
+const { ElementTree } = et;
+const { Element } = et;
+const { SubElement } = et;
 const Wxrd = require('./Wxrd');
 
 const XmlTransport = () => {
 
+  const self = {
 
-	const self = {
-		
-		exportWxrd: (wxrdToExport) => {
+    exportWxrd: (wxrdToExport) => {
 
-			var root = Element('wxrd');
-			root.set('xmlns', 'http://www.w3.org/2005/Atom');
+      const root = Element('wxrd');
+      root.set('xmlns', 'http://www.w3.org/2005/Atom');
 
-			wxrdToExport.metaData.forEach((value, key) => {
-				var metaDataEl = SubElement(root, 'metaData');
-				metaDataEl.set('key', key);
-				metaDataEl.text = value;
-			});
+      wxrdToExport.metaData.forEach((value, key) => {
 
-			wxrdToExport.aliases.forEach((value, key) => {
-				var aliasEl = SubElement(root, 'alias');
-				aliasEl.set('key', key);
-				aliasEl.text = value;
-			});
+        const metaDataEl = SubElement(root, 'metaData');
+        metaDataEl.set('key', key);
+        metaDataEl.text = value;
 
-			var etree = new ElementTree(root);
-			var xml = etree.write({'xml_declaration': false});
-			return xml;
-		},
+      });
 
-		importWxrd: (wxrdAsXmlString) => {
+      wxrdToExport.aliases.forEach((value, key) => {
 
-			const etree = et.parse(wxrdAsXmlString);
-			
-			const metaDataEls = etree.findall('./metaData');
-			const metaDataMap = new Map();
+        const aliasEl = SubElement(root, 'alias');
+        aliasEl.set('key', key);
+        aliasEl.text = value;
 
-			for(var i = 0; i < metaDataEls.length; i++){
+      });
 
-				var metaDataEl = metaDataEls[i];
+      const etree = new ElementTree(root);
+      const xml = etree.write({ xml_declaration: false });
+      return xml;
 
-				const thisKey = metaDataEl.get('key');
-				const thisValue = metaDataEl.text;
-				metaDataMap.set(thisKey, thisValue);
-			}
+    },
 
-			const importedWxrd = Wxrd(metaDataMap);
+    importWxrd: (wxrdAsXmlString) => {
 
-			const aliasEls = etree.findall('./alias');
-			//console.log(aliasEls);
-			for(var i = 0; i < aliasEls.length; i++){
+      const etree = et.parse(wxrdAsXmlString);
 
-				var aliasEl = aliasEls[i];
-				const thisKey = aliasEl.get('key');
-				const thisValue = aliasEl.text;
-				importedWxrd.setAlias(thisKey, thisValue);
-			}
+      const metaDataEls = etree.findall('./metaData');
+      const metaDataMap = new Map();
+      let i;
 
-			return importedWxrd;
-		}
-	};
-	
+      for (i = 0; i < metaDataEls.length; i += 1) {
 
-	return self;
-}
+        const metaDataEl = metaDataEls[i];
+
+        const thisKey = metaDataEl.get('key');
+        const thisValue = metaDataEl.text;
+        metaDataMap.set(thisKey, thisValue);
+
+      }
+
+      const importedWxrd = Wxrd(metaDataMap);
+
+      const aliasEls = etree.findall('./alias');
+      // console.log(aliasEls);
+      for (i = 0; i < aliasEls.length; i += 1) {
+
+        const aliasEl = aliasEls[i];
+        const thisKey = aliasEl.get('key');
+        const thisValue = aliasEl.text;
+        importedWxrd.setAlias(thisKey, thisValue);
+
+      }
+
+      return importedWxrd;
+
+    },
+  };
+
+  return self;
+
+};
 
 module.exports = XmlTransport;
