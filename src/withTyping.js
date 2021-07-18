@@ -1,5 +1,5 @@
 /**
- * @file encapsulates capabilities related to wxrd types
+ * @file Encapsulates capabilities related to wxrd types.
  */
 
 const WXRD_TYPE_KEY = 'wxrdType';

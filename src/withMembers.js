@@ -1,42 +1,39 @@
-const MEMBERS_KEY = "members";
+/**
+ * @file Encapsulates capabilities related to members.
+ */
 
-const withMembers = self => ({
+const MEMBERS_KEY = 'members';
 
-	getMember: (uuidToGet) => {
-		return self.metaData.get(MEMBERS_KEY).get(uuidToGet);
-	},
+const withMembers = (self) => ({
 
-	initializeMembers: () => {
+  getMember: (uuidToGet) => self.metaData.get(MEMBERS_KEY).get(uuidToGet),
 
-		if(!self.members){
+  initializeMembers: () => {
 
-			self.members = new Map();
-		}
-	},
+    if (!self.members) {
 
-	addMember: (member) => {
+      self.members = new Map();
 
-		if(!member.getUuid()){
-			throw("function getUuid() not defined for member");
-		}
+    }
 
-		self.members.set(member.getUuid(), member);
-	},
+  },
 
-	hasMember: (member) => {
+  addMember: (member) => {
 
-		return self.members.has(member.getUuid());
-	},
+    if (!member.getUuid()) {
 
-	getAllMembers: () => {
+      throw Error('function getUuid() not defined for member');
 
-		return self.members;
-	}
+    }
 
+    self.members.set(member.getUuid(), member);
+
+  },
+
+  hasMember: (member) => self.members.has(member.getUuid()),
+
+  getAllMembers: () => self.members,
 
 });
-
-
-
 
 module.exports = withMembers;

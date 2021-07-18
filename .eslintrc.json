@@ -16,6 +16,7 @@
     ],
     "rules": {
         "padded-blocks": ["error", "always"],
+        "no-param-reassign": ["error", { "props": false }],
         "jsdoc/check-access": 1, // Recommended
         "jsdoc/check-alignment": 1, // Recommended
         "jsdoc/check-examples": 1,

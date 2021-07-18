@@ -1,6 +1,17 @@
+/**
+ * @file Encapsulates string based,
+ * non-xml, import and export capabilities.
+ */
+
 const withTransport = (self) => ({
 
-  import: (metaData) => {
+  import: (metaDataAsMap) => {
+
+    metaDataAsMap.forEach((value, key) => {
+
+      self.metaData[key] = value;
+
+    });
 
   },
 
