@@ -180,3 +180,73 @@ test('should detect and parse wxrdStrings as initialization data', () => {
   expect(firstWxrd.metaData).toEqual(secondWxrdlookingForMatch.metaData);
 
 });
+
+
+test('should have a members map', () => {
+
+  const newWxrd = Wxrd('test');
+
+  // console.log(newWxrd);
+
+  expect(newWxrd.members).toBeDefined();
+
+});
+
+test('should have getAllMembers() returning all members', () => {
+
+  const newWxrd = Wxrd('testBook');
+
+  expect(newWxrd.getAllMembers()).toBeDefined();
+
+  // console.log(newWxrd);
+
+  expect(newWxrd.getAllMembers().size).toBe(0);
+
+  const testWxrd = Wxrd('test');
+
+  newWxrd.addMember(testWxrd);
+
+  // console.log(testWxrd);
+
+  expect(newWxrd.getAllMembers().size).toBe(1);
+
+});
+
+test('should test for inclusion of a member with hasMember(uuid)', () => {
+
+  const newWxrd = Wxrd('testBook');
+  const testWxrd = Wxrd('test');
+
+  // console.log(newWxrd);
+  // console.log(testWxrd);
+
+  expect(newWxrd.hasMember(testWxrd)).toBe(false);
+
+  newWxrd.addMember(testWxrd);
+
+  // console.log(newWxrd);
+  // console.log(testWxrd);
+
+  expect(newWxrd.hasMember(testWxrd)).toBe(true);
+
+});
+
+test('should throw error if addMember(member) is called on an object without a uuid', () => {
+
+  /**
+   * Adds an member with an empty uuid string.
+   */
+  function addEmptyUuid() {
+
+    const newWxrd = Wxrd('testBook');
+    const testWxrd = Wxrd('test');
+
+    testWxrd.metaData.set('uuid', '');
+
+    newWxrd.addMember(testWxrd);
+
+  }
+
+  expect(addEmptyUuid).toThrowError('function getUuid() not defined for member');
+
+});

@@ -6,6 +6,7 @@ const withTyping = require('./withTyping');
 const withAliasing = require('./withAliasing');
 const canLog = require('./canLog');
 const withTransport = require('./withTransport');
+const withMembers = require('./withMembers');
 
 const Wxrd = (initializationData) => {
 
@@ -20,10 +21,12 @@ const Wxrd = (initializationData) => {
     withAliasing(self),
     withTransport(self),
     canLog(self),
+    withMembers(self),
   );
 
   newSelf.initializeWxrdType('Wxrd');
   newSelf.initializeAliases();
+  newSelf.initializeMembers();
 
   if (initializationData instanceof Map) {
 

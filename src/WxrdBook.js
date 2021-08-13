@@ -2,22 +2,15 @@
  * @file A Book of Wxrds indexed by uuid.
  */
 
-const withMembers = require('./withMembers');
 const Wxrd = require('./Wxrd');
 
 const WxrdBook = (defaultAlias) => {
 
   const self = Wxrd(defaultAlias);
 
-  const newSelf = Object.assign(
-    self,
-    withMembers(self),
-  );
+  self.metaData.set('wxrdType', 'WxrdBook');
 
-  newSelf.initializeMembers();
-  newSelf.metaData.set('wxrdType', 'WxrdBook');
-
-  return newSelf;
+  return self;
 
 };
 
