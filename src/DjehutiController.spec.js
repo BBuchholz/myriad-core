@@ -26,3 +26,14 @@ test('should create wxrd from multiline string input', ()=>{
   // Should return that Wxrd as the payload of an OperationResult
 
 });
+
+test('should create wxrdbook from input', ()=>{
+
+  const opRes = djehuti.createWxrdBook("some title", "some description");
+  expect(opRes).toBeDefined();
+
+  // Should return a new WxrdBook with the title and description set
+  // Should return that WxrdBook as the payload of an OperationResult
+
+
+});
