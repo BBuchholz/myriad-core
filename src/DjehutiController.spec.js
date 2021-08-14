@@ -25,15 +25,10 @@ test('should create wxrd from multiline string input', () => {
   expect(opRes.successful).toBe(true);
   expect(opRes.messages.length).toBe(0);
 
-  // from planning doc:
-  // Should create a Wxrd as is currently done with
-  // “Wxrd(initializationData)” but parsing from
-  // stringInput as we originally intended (everything
-  // roundtrips to the parser, so when features are turned off
-  // its just text, and when they get turned on, parts of that
-  // text takes on special significance)
-
-  // Should return that Wxrd as the payload of an OperationResult
+  const createdWxrd = opRes.payload;
+  expect(createdWxrd.metaData.get('alias')).toBe('Test String');
+  expect(createdWxrd.metaData.get('tags')).toBe('testing, test');
+  expect(createdWxrd.metaData.get('content')).toBe('Something I wrote down to rembember...');
 
 });
 
