@@ -12,9 +12,6 @@ const DjehutiController = () => {
 
     createWxrd: (multiLineStringInput) => {
 
-      const lines = multiLineStringInput.split(/\r?\n/);
-      
-      console.log(lines);
       const newWxrd = Wxrd(multiLineStringInput);
 
       const operationResult = {

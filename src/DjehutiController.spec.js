@@ -1,5 +1,6 @@
 /**
- * @file Handles all xml import and export capabilities.
+ * @file Djehuti is the main controller for the Basecamp operations
+ * of Myriad.
  */
 
 const DjehutiController = require('./DjehutiController');
@@ -26,9 +27,7 @@ test('should create wxrd from multiline string input', () => {
   expect(opRes.messages.length).toBe(0);
 
   const createdWxrd = opRes.payload;
-  expect(createdWxrd.metaData.get('alias')).toBe('Test String');
-  expect(createdWxrd.metaData.get('tags')).toBe('testing, test');
-  expect(createdWxrd.metaData.get('content')).toBe('Something I wrote down to rembember...');
+  expect(createdWxrd.metaData.get('wxrdValue')).toBe(multiLineInput);
 
 });
 
