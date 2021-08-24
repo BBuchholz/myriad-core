@@ -40,3 +40,24 @@ test('should create wxrdbook from input', () => {
   // Should return that WxrdBook as the payload of an OperationResult
 
 });
+
+it('should export wxrd to JSON string format', () => {
+
+  // djehuti.exportWxrdToJSON(wxrd)
+
+  // Should return a JSON string ready to be written to a text document
+  // Should return that JSON string as the payload of an OperationResult
+  // Should roundtrip with importWxrdFromJSON(...)
+
+
+});
+
+it('should read data from a JSON string and convert it to a valid Wxrd', () => {
+
+  // djehuti.importWxrdFromJSON(jsonString)
+
+  // Should read from a JSON string (such as one taken from a file) and convert it to a valid Wxrd. 
+  // Should return that Wxrd as the payload of an OperationResult
+  // Should roundtrip with exportWxrdToJSON(...)
+
+});
