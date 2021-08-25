@@ -36,8 +36,11 @@ test('should create wxrdbook from input', () => {
   const opRes = djehuti.createWxrdBook('some title');
   expect(opRes).toBeDefined();
 
-  // Should return a new WxrdBook with the title and description set
-  // Should return that WxrdBook as the payload of an OperationResult
+  expect(opRes.payloadType).toBe('Wxrd');
+  expect(opRes.payload.getWxrdType()).toBe('WxrdBook');
+  expect(opRes.payload.metaData.get('wxrdBookTitle')).toBe('some title');
+  expect(opRes.successful).toBe(true);
+  expect(opRes.messages.length).toBe(0);
 
 });
 

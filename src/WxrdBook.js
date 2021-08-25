@@ -4,11 +4,12 @@
 
 const Wxrd = require('./Wxrd');
 
-const WxrdBook = (defaultAlias) => {
+const WxrdBook = (wxrdBookTitle) => {
 
-  const self = Wxrd(defaultAlias);
+  const self = Wxrd(wxrdBookTitle);
 
   self.metaData.set('wxrdType', 'WxrdBook');
+  self.metaData.set('wxrdBookTitle', wxrdBookTitle);
 
   return self;
 

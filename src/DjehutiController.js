@@ -25,11 +25,20 @@ const DjehutiController = () => {
 
     },
 
-    createWxrdBook: (bookTitle) => (
+    createWxrdBook: (bookTitle) => {
 
-      WxrdBook(bookTitle)
+      const newWxrd = WxrdBook(bookTitle);
 
-    ),
+      const operationResult = {
+        payload: newWxrd,
+        payloadType: 'Wxrd',
+        successful: true,
+        messages: [],
+      };
+
+      return operationResult;      
+    },
+
   };
 
   return self;

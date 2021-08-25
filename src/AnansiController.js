@@ -10,9 +10,16 @@ const AnansiController = () => {
 
   const self = {
 
-    something: (pathToFile) => {
+    link: (firstWxrd, secondWxrd) => {
 
-      const newWxrd = djehuti.createWxrd("this should be the keep note");
+      const defaultAlias = "wxrdLink: {" + 
+                           firstWxrd.getUuid() + "} <=> {" + 
+                           secondWxrd.getUuid() + "}" ;
+      const opResNewWxrd = djehuti.createWxrd(defaultAlias);
+      const newWxrd = opResNewWxrd.payload;
+      newWxrd.metaData.set('wxrdType', 'WxrdLink');
+      newWxrd.metaData.set('firstWxrdUuid', firstWxrd.getUuid());
+      newWxrd.metaData.set('secondWxrdUuid', secondWxrd.getUuid());
 
       const operationResult = {
         payload: newWxrd,
