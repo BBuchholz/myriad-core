@@ -44,23 +44,32 @@ test('should create wxrdbook from input', () => {
 
 });
 
-it('should export wxrd to JSON string format', () => {
+it('should export and import wxrd to and from JSON string format', () => {
 
-  // djehuti.exportWxrdToJSON(wxrd)
+  const opResCreate = djehuti.createWxrd('test wxrd');
+  const testWxrd = opResCreate.payload;
+  expect(testWxrd).toBeDefined();
+  
+  const opResExport = djehuti.exportWxrdToJson(testWxrd);
 
-  // Should return a JSON string ready to be written to a text document
-  // Should return that JSON string as the payload of an OperationResult
-  // Should roundtrip with importWxrdFromJSON(...)
+  expect(opResExport.payloadType).toBe('jsonString');
+  
+  const jsonString = opResExport.payload;
 
+  // console.log(jsonString);
 
-});
+  const opResImport = djehuti.importWxrdFromJson(jsonString);
 
-it('should read data from a JSON string and convert it to a valid Wxrd', () => {
+  expect(opResImport.payloadType).toBe('Wxrd');
 
-  // djehuti.importWxrdFromJSON(jsonString)
+  const importedWxrd = opResImport.payload;
 
-  // Should read from a JSON string (such as one taken from a file) and convert it to a valid Wxrd. 
-  // Should return that Wxrd as the payload of an OperationResult
-  // Should roundtrip with exportWxrdToJSON(...)
+  expect(importedWxrd.getUuid()).toBe(testWxrd.getUuid());
 
+  // test again by roundtripping back to a string (should be identical)
+  const opResExportAgain = djehuti.exportWxrdToJson(importedWxrd);
+
+  const jsonStringTwo = opResExportAgain.payload;
+
+  expect(jsonStringTwo).toBe(jsonString);
 });

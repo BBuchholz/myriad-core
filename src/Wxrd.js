@@ -56,6 +56,10 @@ const Wxrd = (initializationData) => {
 
     }
 
+  } else if ("metaData" in initializationData) {
+
+    return Object.assign(newSelf, initializationData);
+
   } else {
 
     throw new Error('unrecognized initialization data!');
