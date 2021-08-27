@@ -10,9 +10,14 @@ const PerduraboController = () => {
 
   const self = {
 
-    something: (pathToFile) => {
+    extractTemplate: (wxrdToExtractFrom) => {
 
-      const newWxrd = djehuti.createWxrd("this should be the keep note");
+      
+      const defaultAlias = "template from: {" + 
+                           wxrdToExtractFrom.getUuid() + "}";
+      const opResNewWxrd = djehuti.createWxrd(defaultAlias);
+      const newWxrd = opResNewWxrd.payload;
+      newWxrd.metaData.set('wxrdType', 'WxrdTemplate');
 
       const operationResult = {
         payload: newWxrd,
