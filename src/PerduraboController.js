@@ -19,6 +19,19 @@ const PerduraboController = () => {
       const newWxrd = opResNewWxrd.payload;
       newWxrd.metaData.set('wxrdType', 'WxrdTemplate');
 
+      for (let [key, value] of wxrdToExtractFrom.metaData){
+        
+        if(key != 'createdAt' && 
+           key != 'uuid' && 
+           key != 'wxrdType' &&
+           key != 'wxrdValue'){
+
+          newWxrd.metaData.set(key, value);
+        
+        }
+        
+      }
+
       const operationResult = {
         payload: newWxrd,
         payloadType: 'Wxrd',
