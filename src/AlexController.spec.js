@@ -4,8 +4,10 @@
  */
 
 const AlexController = require('./AlexController');
+const DjehutiController = require('./DjehutiController');
 
 const alex = AlexController();
+const djehuti = DjehutiController();
 
 it('should have at least one test', () => {
 
@@ -34,10 +36,16 @@ it('should append sources to an existing wxrd', () => {
 
 it('should create sources', () => {
 
+  const sourceAlias = '[current user] Personal Log'
+  const opRes = alex.createSource(sourceAlias);
+  expect(opRes).toBeDefined();
+  expect(opRes.payloadType).toBe('Wxrd');
 
-  // alex.createSource(sourceAlias)
+  expect(opRes.payload.getWxrdType()).toBe('Source');
+  expect(opRes.successful).toBe(true);
+  expect(opRes.messages.length).toBe(0);
 
-  // Returns Wxrd with wxrdType: "source"
-  // Should return that Wxrd as the payload of an OperationResult
+  const createdSource = opRes.payload;
+  expect(createdSource.metaData.get('alias')).toBe(sourceAlias);
 
 });

@@ -10,9 +10,14 @@ const AlexController = () => {
 
   const self = {
 
-    something: (pathToFile) => {
+    createSource: (sourceAlias) => {
 
-      const newWxrd = djehuti.createWxrd("this should be the keep note");
+      const opResCreate = djehuti.createWxrd("this should be the keep note");
+
+      const newWxrd = opResCreate.payload;
+
+      newWxrd.metaData.set('wxrdType', 'Source');
+      newWxrd.metaData.set('alias', sourceAlias);
 
       const operationResult = {
         payload: newWxrd,
