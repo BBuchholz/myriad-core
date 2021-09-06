@@ -26,11 +26,34 @@ it('should append sources to an existing wxrd', () => {
   // Also, a metadata value for "replacesWxrd" set to the uuid of 
   // the previous Wxrd (Wxrds should be versioned by uuid)
 
-  // Should return that Wxrd as the payload of an OperationResult
-  
   // Should log errors to opResult and fail if “srcWxrd” wxrdType 
   // isn’t “source” or a derivative (eg. “source:book”, 
   // “source:movie”, “source:url”)
+
+  const bookSourceAlias = 'Test Book Title';
+  const miscSourceAlias = 'A Misc Source';
+  const logSourceAlias = '[current user] Personal Log';
+  const notASourceAlias = 'This will be a regular wxrd';
+
+  const bookSource = alex.createSource(bookSourceAlias, 'Source:Book').payload;
+  const miscSource = alex.createSource(miscSourceAlias).payload;
+  const logSource = alex.createSource(logSourceAlias, 'Source:Log').payload;
+  const notASource = djehuti.createWxrd(notASourceAlias).payload;
+  const wxrd = djehuti.createWxrd('test wxrd').payload;
+
+  const sources = [bookSource, miscSource, logSource];
+
+  const opResAppend = alex.appendSources(wxrd, sources);
+  expect(opResAppend).toBeDefined();
+  expect(opResAppend.payloadType).toBe('Wxrd');
+
+  expect(opResAppend.payload.getWxrdType()).toBe('Source');
+  expect(opResAppend.successful).toBe(true);
+  expect(opResAppend.messages.length).toBe(0);
+
+  const createdSource = opResAppend.payload;
+  expect(createdSource.metaData.get('alias')).toBe(bookSourceAlias);
+
 
 });
 
@@ -42,6 +65,24 @@ it('should create sources', () => {
   expect(opRes.payloadType).toBe('Wxrd');
 
   expect(opRes.payload.getWxrdType()).toBe('Source');
+  expect(opRes.successful).toBe(true);
+  expect(opRes.messages.length).toBe(0);
+
+  const createdSource = opRes.payload;
+  expect(createdSource.metaData.get('alias')).toBe(sourceAlias);
+
+});
+
+
+it('should create typed sources if a source type is supplied', () => {
+
+  const sourceAlias = '[current user] Personal Log';
+  const sourceType = 'Personal Log';
+  const opRes = alex.createSource(sourceAlias, sourceType);
+  expect(opRes).toBeDefined();
+  expect(opRes.payloadType).toBe('Wxrd');
+
+  expect(opRes.payload.getWxrdType()).toBe('Source:Personal Log');
   expect(opRes.successful).toBe(true);
   expect(opRes.messages.length).toBe(0);
 

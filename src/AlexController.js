@@ -30,6 +30,34 @@ const AlexController = () => {
 
     },
 
+    appendSources: (wxrd, sources) => {
+
+      const opResNewWxrd = djehuti.createWxrd("appending sources to " + wxrd.getUuid() + "... this should get replaced");
+      const newWxrd = opResNewWxrd.payload;
+
+      for (let [key, value] of wxrd.metaData){
+        
+        if(key != 'createdAt' && 
+           key != 'uuid'){
+
+          newWxrd.metaData.set(key, value);
+        
+        }
+        
+      }
+
+      const operationResult = {
+        payload: newWxrd,
+        payloadType: 'Wxrd',
+        successful: true,
+        messages: [],
+      };
+
+      return operationResult;
+
+
+    },
+
   };
 
   return self;
