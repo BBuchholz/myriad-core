@@ -10,14 +10,22 @@ const AlexController = () => {
 
   const self = {
 
-    createSource: (sourceAlias) => {
+    createSource: (sourceAlias, optionalSourceType) => {
 
       const opResCreate = djehuti.createWxrd("this should be the keep note");
 
       const newWxrd = opResCreate.payload;
 
-      newWxrd.metaData.set('wxrdType', 'Source');
       newWxrd.metaData.set('alias', sourceAlias);
+
+      if(optionalSourceType){
+      
+        newWxrd.metaData.set('wxrdType', 'Source:' + optionalSourceType);
+      
+      }else{
+
+        newWxrd.metaData.set('wxrdType', 'Source');  
+      }
 
       const operationResult = {
         payload: newWxrd,
@@ -45,6 +53,16 @@ const AlexController = () => {
         }
         
       }
+
+      var uuids = [];
+      for(let src of sources){
+        console.log(src);
+        uuids.push(src.getUuid());
+      }
+      const sortedUuids = uuids.sort();
+      const stringOutput = sortedUuids.join(', ');
+
+      newWxrd.metaData.set('wxrdSources', stringOutput);
 
       const operationResult = {
         payload: newWxrd,

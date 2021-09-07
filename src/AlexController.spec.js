@@ -35,25 +35,44 @@ it('should append sources to an existing wxrd', () => {
   const logSourceAlias = '[current user] Personal Log';
   const notASourceAlias = 'This will be a regular wxrd';
 
-  const bookSource = alex.createSource(bookSourceAlias, 'Source:Book').payload;
+  const bookSource = alex.createSource(bookSourceAlias, 'Book').payload;
   const miscSource = alex.createSource(miscSourceAlias).payload;
-  const logSource = alex.createSource(logSourceAlias, 'Source:Log').payload;
+  const logSource = alex.createSource(logSourceAlias, 'Personal Log').payload;
   const notASource = djehuti.createWxrd(notASourceAlias).payload;
-  const wxrd = djehuti.createWxrd('test wxrd').payload;
+  const originalWxrd = djehuti.createWxrd('test wxrd').payload;
 
   const sources = [bookSource, miscSource, logSource];
 
-  const opResAppend = alex.appendSources(wxrd, sources);
+  const opResAppend = alex.appendSources(originalWxrd, sources);
   expect(opResAppend).toBeDefined();
   expect(opResAppend.payloadType).toBe('Wxrd');
 
-  expect(opResAppend.payload.getWxrdType()).toBe('Source');
+  const appendedWxrd = opResAppend.payload;
+  expect(appendedWxrd.getWxrdType()).toBe(originalWxrd.getWxrdType());
+  expect(appendedWxrd.getUuid()).not.toBe(originalWxrd.getUuid());
   expect(opResAppend.successful).toBe(true);
   expect(opResAppend.messages.length).toBe(0);
 
-  const createdSource = opResAppend.payload;
-  expect(createdSource.metaData.get('alias')).toBe(bookSourceAlias);
+  //should sort the list alphabetically
+  const uuids = [bookSource.getUuid(), miscSource.getUuid(), logSource.getUuid()];
+  const sortedUuids = uuids.sort();
+  const stringOutput = sortedUuids.join(', ');
 
+  expect(appendedWxrd.metaData.get('wxrdSources')).toBe(stringOutput);
+
+  //this one should cause the operation to fail
+  sources.push(notASourceAlias);
+
+  const opResAppendFailure = alex.appendSources(originalWxrd, sources);
+  expect(opResAppendFailure).toBeDefined();
+  expect(opResAppendFailure.payloadType).toBe('Unsuccessful Operation');
+
+  const appendedWxrdFailure = opResAppendFailure.payload;
+  expect(appendedWxrdFailure.getWxrdType()).toBe(originalWxrd.getWxrdType());
+  expect(appendedWxrdFailure.getUuid()).not.toBe(originalWxrd.getUuid());
+  expect(opResAppendFailure.successful).toBe(fale);
+  expect(opResAppendFailure.messages.length).toBe(1);
+  expect(opResAppendFailure.messages[0]).toBe('{' + notASourceAlias.getUuid() + '} is not a source!');
 
 });
 
