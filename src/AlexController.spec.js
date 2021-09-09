@@ -60,19 +60,32 @@ it('should append sources to an existing wxrd', () => {
 
   expect(appendedWxrd.metaData.get('wxrdSources')).toBe(stringOutput);
 
-  //this one should cause the operation to fail
-  sources.push(notASourceAlias);
+  //this one should cause the operation to fail (all wxrds but not all sources)
+  sources.push(notASource);
 
   const opResAppendFailure = alex.appendSources(originalWxrd, sources);
   expect(opResAppendFailure).toBeDefined();
-  expect(opResAppendFailure.payloadType).toBe('Unsuccessful Operation');
+  expect(opResAppendFailure.payloadType).toBe('UnrecognizedSource');
 
   const appendedWxrdFailure = opResAppendFailure.payload;
   expect(appendedWxrdFailure.getWxrdType()).toBe(originalWxrd.getWxrdType());
   expect(appendedWxrdFailure.getUuid()).not.toBe(originalWxrd.getUuid());
-  expect(opResAppendFailure.successful).toBe(fale);
+  expect(opResAppendFailure.successful).toBe(false);
   expect(opResAppendFailure.messages.length).toBe(1);
-  expect(opResAppendFailure.messages[0]).toBe('{' + notASourceAlias.getUuid() + '} is not a source!');
+  expect(opResAppendFailure.messages[0]).toBe(notASource.getUuid() + ' is a valid wxrd but is not a valid source!');
+
+  //this one should cause the operation to fail differently (not all wxrds)
+  sources.pop(notASource);
+  sources.push(notASourceAlias);
+
+  const opResAppendFailureTwo = alex.appendSources(originalWxrd, sources);
+  expect(opResAppendFailureTwo).toBeDefined();
+  expect(opResAppendFailureTwo.payloadType).toBe('UuidNotFound');
+
+  const appendedWxrdFailureTwo = opResAppendFailureTwo.payload;
+  expect(opResAppendFailureTwo.successful).toBe(false);
+  expect(opResAppendFailureTwo.messages.length).toBe(1);
+  expect(opResAppendFailureTwo.messages[0]).toBe('supplied source is not valid wxrd, no uuid found!');
 
 });
 

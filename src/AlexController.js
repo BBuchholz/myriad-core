@@ -43,7 +43,7 @@ const AlexController = () => {
       const opResNewWxrd = djehuti.createWxrd("appending sources to " + wxrd.getUuid() + "... this should get replaced");
       const newWxrd = opResNewWxrd.payload;
 
-      for (let [key, value] of wxrd.metaData){
+      for (const [key, value] of wxrd.metaData){
         
         if(key != 'createdAt' && 
            key != 'uuid'){
@@ -55,16 +55,52 @@ const AlexController = () => {
       }
 
       var uuids = [];
-      for(let src of sources){
-        console.log(src);
-        uuids.push(src.getUuid());
+      var operationResult;
+
+      for(const src of sources){
+        
+        if(src.getUuid){
+
+          if(src.metaData.get('wxrdType') == 'Source' ||
+             src.metaData.get('wxrdType').startsWith('Source:')){
+
+            uuids.push(src.getUuid());  
+          
+          } else {
+
+            operationResult = {
+              payload: src,
+              payloadType: 'UnrecognizedSource',
+              successful: false,
+              messages: [
+                src.getUuid() + ' is a valid wxrd but is not a valid source!'
+              ],
+            };   
+
+            return  operationResult; 
+          
+          }
+          
+        } else {
+
+          operationResult = {
+            payload: src,
+            payloadType: 'UuidNotFound',
+            successful: false,
+            messages: [],
+          };    
+        
+          return operationResult;
+        }
+        
       }
+
       const sortedUuids = uuids.sort();
       const stringOutput = sortedUuids.join(', ');
 
       newWxrd.metaData.set('wxrdSources', stringOutput);
 
-      const operationResult = {
+      operationResult = {
         payload: newWxrd,
         payloadType: 'Wxrd',
         successful: true,
