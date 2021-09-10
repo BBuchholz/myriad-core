@@ -17,19 +17,6 @@ it('should have at least one test', () => {
 
 it('should append sources to an existing wxrd', () => {
 
-
-  // alex.appendSources(wxrd, srcWxrds)
-
-  // Returns new Wxrd that is a copy of the supplied "wxrd" 
-  // parameter with the metadata value “wxrdSource” set to the 
-  // uuid of one or more Wxrds supplied as the “srcWxrds” parameter. 
-  // Also, a metadata value for "replacesWxrd" set to the uuid of 
-  // the previous Wxrd (Wxrds should be versioned by uuid)
-
-  // Should log errors to opResult and fail if “srcWxrd” wxrdType 
-  // isn’t “source” or a derivative (eg. “source:book”, 
-  // “source:movie”, “source:url”)
-
   const bookSourceAlias = 'Test Book Title';
   const miscSourceAlias = 'A Misc Source';
   const logSourceAlias = '[current user] Personal Log';
@@ -85,7 +72,7 @@ it('should append sources to an existing wxrd', () => {
   const appendedWxrdFailureTwo = opResAppendFailureTwo.payload;
   expect(opResAppendFailureTwo.successful).toBe(false);
   expect(opResAppendFailureTwo.messages.length).toBe(1);
-  expect(opResAppendFailureTwo.messages[0]).toBe('supplied source is not valid wxrd, no uuid found!');
+  expect(opResAppendFailureTwo.messages[0]).toBe('supplied source is not a valid wxrd, no uuid found');
 
 });
 

@@ -87,7 +87,9 @@ const AlexController = () => {
             payload: src,
             payloadType: 'UuidNotFound',
             successful: false,
-            messages: [],
+            messages: [
+              'supplied source is not a valid wxrd, no uuid found'
+            ],
           };    
         
           return operationResult;
