@@ -13,11 +13,20 @@ test('should have at least one test', () => {
 
 });
 
-it('should read from keep takout file', () => {
+it('should read from keep takeout file', () => {
 
-  // chappie.readFromKeepTakeoutFile(pathToFile)
-  // Should import from keep takeout file and create a Wxrd of type “keepNote”
-  // Should return that Wxrd as the payload of an OperationResult
+  const pathToFile = './testData/testData.json';
+
+  const opRes = chappie.readFromKeepTakeoutFile(pathToFile);
+
+  expect(opRes).toBeDefined();
+  expect(opRes.payloadType).toBe('Wxrd');
+  expect(opRes.payload.getWxrdType()).toBe('KeepNoteTakeout');
+  expect(opRes.successful).toBe(true);
+  expect(opRes.messages.length).toBe(0);
+
+  const keepNoteTakeoutWxrd = opRes.payload;
+  expect(keepNoteTakeoutWxrd.metaData.get('expectedKeyHere')).toBe('expectedValueHere');
 
   // use this link: https://nodejs.dev/learn/reading-files-with-nodejs
 });

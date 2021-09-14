@@ -12,7 +12,7 @@ const ChappieController = () => {
 
     readFromKeepTakeoutFile: (pathToFile) => {
 
-      const newWxrd = djehuti.createWxrd("this should be the keep note");
+      const newWxrd = djehuti.createWxrd("this should be the keep note").payload;
 
       const operationResult = {
         payload: newWxrd,
