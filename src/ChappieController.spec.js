@@ -15,18 +15,31 @@ test('should have at least one test', () => {
 
 it('should read from keep takeout file', () => {
 
-  const pathToFile = './testData/testData.json';
+  const pathToNonExistantFile = './testData/testData.json';
 
-  const opRes = chappie.readFromKeepTakeoutFile(pathToFile);
+  const opResFail = chappie.readFromKeepTakeoutFile(pathToNonExistantFile);
 
-  expect(opRes).toBeDefined();
-  expect(opRes.payloadType).toBe('Wxrd');
-  expect(opRes.payload.getWxrdType()).toBe('KeepNoteTakeout');
-  expect(opRes.successful).toBe(true);
-  expect(opRes.messages.length).toBe(0);
+  expect(opResFail).toBeDefined();
+  expect(opResFail.payloadType).toBe('OpResErrorWxrd');
+  expect(opResFail.payload.getWxrdType()).toBe('KeepNoteTakeout');
+  expect(opResFail.successful).toBe(false);
+  expect(opResFail.messages.length).toBe(1);
 
-  const keepNoteTakeoutWxrd = opRes.payload;
-  expect(keepNoteTakeoutWxrd.metaData.get('expectedKeyHere')).toBe('expectedValueHere');
+  expect(opResFail.messages[0].startsWith('Error:')).toBe(true);
 
-  // use this link: https://nodejs.dev/learn/reading-files-with-nodejs
+
+  const pathToExistantFile = './testData/2020-08-17T19_33_04.260-05_00.json';
+
+  const opResSuccess = chappie.readFromKeepTakeoutFile(pathToExistantFile);
+
+  console.log(opResSuccess);
+  expect(opResSuccess).toBeDefined();
+  expect(opResSuccess.payloadType).toBe('Wxrd');
+  expect(opResSuccess.payload.getWxrdType()).toBe('KeepNoteTakeout');
+  expect(opResSuccess.successful).toBe(true);
+  expect(opResSuccess.messages.length).toBe(0);
+
+  const keepNoteTakeoutWxrd = opResSuccess.payload;
+  expect(keepNoteTakeoutWxrd.metaData.get('rawFileData')).toBe('expectedValueHere');
+
 });
