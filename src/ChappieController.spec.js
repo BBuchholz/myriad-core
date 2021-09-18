@@ -32,14 +32,32 @@ it('should read from keep takeout file', () => {
 
   const opResSuccess = chappie.readFromKeepTakeoutFile(pathToExistantFile);
 
-  console.log(opResSuccess);
   expect(opResSuccess).toBeDefined();
   expect(opResSuccess.payloadType).toBe('Wxrd');
   expect(opResSuccess.payload.getWxrdType()).toBe('KeepNoteTakeout');
   expect(opResSuccess.successful).toBe(true);
   expect(opResSuccess.messages.length).toBe(0);
 
-  const keepNoteTakeoutWxrd = opResSuccess.payload;
-  expect(keepNoteTakeoutWxrd.metaData.get('rawFileData')).toBe('expectedValueHere');
+  const expectedRawData = 
+    '{' + 
+      '"color":"DEFAULT",' + 
+      '"isTrashed":false,' + 
+      '"isPinned":false,' + 
+      '"isArchived":true,' + 
+      '"textContent":"",' + 
+      '"title":"",' + 
+      '"userEditedTimestampUsec":1552395275747000' + 
+    '}';
 
+
+  const keepNoteTakeoutWxrd = opResSuccess.payload;
+  expect(keepNoteTakeoutWxrd.metaData.get('rawFileData')).toBe(expectedRawData);
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteColor')).toBe('DEFAULT');
+
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsTrashed')).toBe('false'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsPinned')).toBe('false'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsArchived')).toBe('true'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteTextContent')).toBe(''); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteTitle')).toBe(''); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteUserEditedTimestampUsec')).toBe('155239527574700'); 
 });
