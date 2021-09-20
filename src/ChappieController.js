@@ -28,6 +28,37 @@ const ChappieController = () => {
         newWxrd.metaData.set('rawFileData', fileData);
 
         //parse json here
+        const parsedJsonObj = JSON.parse(fileData.toString());
+
+        console.log(parsedJsonObj);
+
+        if('color' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteColor', parsedJsonObj.color.toString());
+        }
+
+        if('isPinned' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteIsPinned', parsedJsonObj.isPinned.toString());
+        }
+
+        if('isTrashed' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteIsTrashed', parsedJsonObj.isTrashed.toString());
+        }
+
+        if('isArchived' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteIsArchived', parsedJsonObj.isArchived.toString());
+        }
+
+        if('textContent' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteTextContent', parsedJsonObj.textContent.toString());
+        }
+
+        if('title' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteTitle', parsedJsonObj.title.toString());
+        }
+
+        if('userEditedTimestampUsec' in parsedJsonObj){
+          newWxrd.metaData.set('keepNoteUserEditedTimestampUsec', parsedJsonObj.userEditedTimestampUsec.toString());
+        }
 
         operationResult = {
           payload: newWxrd,

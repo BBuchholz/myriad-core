@@ -52,12 +52,12 @@ it('should read from keep takeout file', () => {
 
   const keepNoteTakeoutWxrd = opResSuccess.payload;
   expect(keepNoteTakeoutWxrd.metaData.get('rawFileData')).toBe(expectedRawData);
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteColor')).toBe('DEFAULT');
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteColor')).toBe('DEFAULT');
 
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsTrashed')).toBe('false'); 
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsPinned')).toBe('false'); 
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsArchived')).toBe('true'); 
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteTextContent')).toBe(''); 
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteTitle')).toBe(''); 
-  // expect(keepNoteTakeoutWxrd.metaData.get('keepNoteUserEditedTimestampUsec')).toBe('155239527574700'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsTrashed')).toBe('false'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsPinned')).toBe('false'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteIsArchived')).toBe('true'); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteTextContent')).toBe(''); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteTitle')).toBe(''); 
+  expect(keepNoteTakeoutWxrd.metaData.get('keepNoteUserEditedTimestampUsec')).toBe('1552395275747000'); 
 });
