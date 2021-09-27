@@ -30,8 +30,6 @@ const ChappieController = () => {
         //parse json here
         const parsedJsonObj = JSON.parse(fileData.toString());
 
-        console.log(parsedJsonObj);
-
         if('color' in parsedJsonObj){
           newWxrd.metaData.set('keepNoteColor', parsedJsonObj.color.toString());
         }
