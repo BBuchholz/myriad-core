@@ -18,6 +18,7 @@ test('should export a Wxrd as xml', () => {
     + '<metaData key="wxrdType">Wxrd</metaData>'
     + `<metaData key="uuid">${uuid}</metaData>`
     + `<metaData key="createdAt">${createdAt}</metaData>`
+    + `<metaData key="wxrdValue">test</metaData>`
     + `<alias key="${uuid}">test</alias>`
     + '</wxrd>';
 

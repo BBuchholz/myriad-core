@@ -181,7 +181,6 @@ test('should detect and parse wxrdStrings as initialization data', () => {
 
 });
 
-
 test('should have a members map', () => {
 
   const newWxrd = Wxrd('test');

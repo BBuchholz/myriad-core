@@ -52,8 +52,13 @@ const Wxrd = (initializationData) => {
       newSelf.initializeUuid();
       newSelf.initializeCreatedAt();
       newSelf.setAlias(newSelf.getUuid(), initializationData);
+      newSelf.metaData.set('wxrdValue', initializationData);
 
     }
+
+  } else if ("metaData" in initializationData) {
+
+    return Object.assign(newSelf, initializationData);
 
   } else {
 
