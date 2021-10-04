@@ -1,5 +1,5 @@
-const DeckUtils = require('./DeckUtils');
-const testUtils = DeckUtils();
+const KnechtController = require('./KnechtController');
+const magisterLudi = KnechtController();
 
 describe('deal function', () => {
 
@@ -11,7 +11,7 @@ describe('deal function', () => {
 							 
 		const currentDeckLength = currentDeck.length;
 							 
-		var deal = testUtils.deal(currentDeck, 4);
+		var deal = magisterLudi.deal(currentDeck, 4);
 		const expectedFourCardDeal = ['4D', '5W', '3C', '2S'];
 		expect(expectedFourCardDeal).toStrictEqual(deal.dealtCards);
 		expect(deal.remainingDeck.length).toBe(currentDeckLength - 4);
@@ -34,7 +34,7 @@ describe('scenarios', () => {
 			[8, '8S', '7S', '4W', '6C']
 		];
 
-	var scenarios = testUtils.getScenarios();			
+	var scenarios = magisterLudi.getScenarios();			
 
 	test.each(expectedScenarios)(
 		"given scenario index %p, returns four cards, %p, %p, %p, and %p",
@@ -42,13 +42,13 @@ describe('scenarios', () => {
 
 			var scenario = scenarios[scenarioIndex];
 			expect(scenario.daemonCard.power).toBe(daemonCard);
-			expect(scenario.daemonCard.description).toBe(testUtils.cardToDescription(scenario.daemonCard.power));
+			expect(scenario.daemonCard.description).toBe(magisterLudi.cardToDescription(scenario.daemonCard.power));
 			expect(scenario.playerCards[0].power).toBe(playerCardOne);
-			expect(scenario.playerCards[0].description).toBe(testUtils.cardToDescription(scenario.playerCards[0].power));
+			expect(scenario.playerCards[0].description).toBe(magisterLudi.cardToDescription(scenario.playerCards[0].power));
 			expect(scenario.playerCards[1].power).toBe(playerCardTwo);
-			expect(scenario.playerCards[1].description).toBe(testUtils.cardToDescription(scenario.playerCards[1].power));
+			expect(scenario.playerCards[1].description).toBe(magisterLudi.cardToDescription(scenario.playerCards[1].power));
 			expect(scenario.playerCards[2].power).toBe(playerCardThree);
-			expect(scenario.playerCards[2].description).toBe(testUtils.cardToDescription(scenario.playerCards[2].power));
+			expect(scenario.playerCards[2].description).toBe(magisterLudi.cardToDescription(scenario.playerCards[2].power));
 
 		}
 	);
@@ -68,7 +68,7 @@ describe('delta utils', () => {
 	test.each(suitToHDeltaCases)(
 		"given suit %p as arg, returns HDelta of %p",
 		(suitArg, expectedResult) => {
-			const result  = testUtils.getHDeltaFromSuit(suitArg);
+			const result  = magisterLudi.getHDeltaFromSuit(suitArg);
 			expect(result).toEqual(expectedResult);
 		}
 	);
@@ -85,7 +85,7 @@ describe('delta utils', () => {
 	test.each(suitToMDeltaCases)(
 		"given suit %p as arg, returns MDelta of %p",
 		(suitArg, expectedResult) => {
-			const result  = testUtils.getMDeltaFromSuit(suitArg);
+			const result  = magisterLudi.getMDeltaFromSuit(suitArg);
 			expect(result).toEqual(expectedResult);
 		}
 	);
