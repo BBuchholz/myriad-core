@@ -7,7 +7,8 @@ const {
 	AnansiController,
 	MyceliaController,
 	DjehutiController,
-	AlexController 
+	AlexController,
+	KnechtController 
 } = require('./index');
 
 test('should have Wxrd defined in index', () => {
@@ -75,5 +76,11 @@ it('should have AlexController defined in index', () => {
 it('should have PerduraboController defined in index', () => {
 
 	const testController = PerduraboController();
+	expect(testController).toBeDefined();
+});	
+
+it('should have KnechtController defined in index', () => {
+
+	const testController = KnechtController();
 	expect(testController).toBeDefined();
 });	

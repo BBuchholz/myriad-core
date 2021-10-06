@@ -6,7 +6,8 @@ const MyceliaController = require('./src/MyceliaController');
 const AnansiController = require('./src/AnansiController');
 const ChappieController = require('./src/ChappieController');
 const AlexController = require('./src/AlexController');
-const PerduraboController = require('./src/PerduraboController');  
+const PerduraboController = require('./src/PerduraboController'); 
+const KnechtController = require('./src/KnechtController'); 
 
 module.exports = { 
 	Wxrd,
@@ -17,5 +18,6 @@ module.exports = {
 	AnansiController,
 	ChappieController,
 	AlexController,
-	PerduraboController
+	PerduraboController,
+	KnechtController
 };
