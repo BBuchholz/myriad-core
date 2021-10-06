@@ -78,8 +78,24 @@ Sets 'wxrdType' to 'WxrdBook'
 
 # Rogue Scholar
 ## AlexController
-- createSource(sourceAlias, optionalSourceType) - appendSources(wxrd, sources)
+- createSource(sourceAlias, optionalSourceType) 
+- appendSources(wxrd, sources)
 
 # Every Act Is A Magickal Act
 ## PerduraboController
 - extractTemplate(wxrdToExtractFrom)Copies all keys and values to a template ignoring the keys 'createdAt', 'uuid', 'wxrdType', and 'wxrdValue'
+
+# Would You Like To Play A Game
+## KnechtController
+- getScenarios()
+- deal(currentDeck, numberToDeal)
+- parseSuit(cardValue)
+- parseRank(cardValue, suitKey)
+- suitKeyToName(suitKey)
+- rankValueToName(rankValue)
+- getDynamicScenarios()
+- cardToDescription(cardValue)
+- createScenario(fourCardKeyArray)
+- getHardCodedScenarios()
+- getHDeltaFromSuit(suit)
+- getMDeltaFromSuit(suit{
